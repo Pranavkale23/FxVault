@@ -1,0 +1,13 @@
+<nav class="navbar glass-card" *ngIf="authService.isAuthenticated()">
+  <div class="nav-brand">
+    <span class="text-gradient">Multi-Currency Wallet</span>
+  </div>
+  <div class="nav-links">
+    <span class="user-email">{{ authService.getUserEmail() }}</span>
+    <button class="btn-primary logout-btn" (click)="logout()">Logout</button>
+  </div>
+</nav>
+
+<main class="main-content">
+  <router-outlet></router-outlet>
+</main>

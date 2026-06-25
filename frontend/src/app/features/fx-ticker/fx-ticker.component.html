@@ -1,0 +1,17 @@
+<div class="ticker-container bg-gray-900 border-b border-gray-800 text-sm overflow-hidden py-2 whitespace-nowrap">
+  <div class="ticker-content inline-block">
+    <span *ngFor="let r of rates" class="mx-6 font-medium">
+      <span class="text-gray-400 mr-2">{{r.sourceCurrency}}/{{r.targetCurrency}}</span>
+      <span [ngClass]="{
+        'text-green-400': r.status === 'up',
+        'text-red-400': r.status === 'down',
+        'text-gray-100': r.status === 'same'
+      }" class="transition-colors duration-300">
+        {{r.rate | number:'1.4-4'}}
+        <span *ngIf="r.status === 'up'">▲</span>
+        <span *ngIf="r.status === 'down'">▼</span>
+        <span *ngIf="r.status === 'same'">-</span>
+      </span>
+    </span>
+  </div>
+</div>

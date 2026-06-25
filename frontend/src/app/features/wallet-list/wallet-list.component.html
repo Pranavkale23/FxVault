@@ -1,0 +1,32 @@
+<div class="glass-card">
+  <div class="section-header">
+    <h3>Your Wallets</h3>
+    <div class="header-actions">
+      <select class="form-control currency-select" [(ngModel)]="newCurrency">
+        <option value="USD">USD</option>
+        <option value="EUR">EUR</option>
+        <option value="GBP">GBP</option>
+        <option value="INR">INR</option>
+      </select>
+      <button class="btn-primary btn-sm" (click)="createWallet()" [disabled]="creating">
+        {{ creating ? '...' : '+ Create' }}
+      </button>
+      <button class="btn-primary btn-sm" (click)="loadWallets()">Refresh</button>
+    </div>
+  </div>
+
+  <div *ngIf="loading" class="text-muted mt-20">Loading wallets...</div>
+
+  <div *ngIf="!loading && wallets.length === 0" class="text-muted mt-20">
+    No wallets found. Select a currency above and click "+ Create" to get started!
+  </div>
+
+  <div class="wallets-grid" *ngIf="!loading && wallets.length > 0">
+    <div class="wallet-card" *ngFor="let wallet of wallets">
+      <div class="currency-badge">{{ wallet.currency }}</div>
+      <div class="wallet-balance">{{ wallet.balance | number:'1.2-2' }}</div>
+      <div class="wallet-id text-muted" style="font-size: 0.8rem;">ID: {{ wallet.id }}</div>
+      <button class="btn-primary btn-sm" style="margin-top: 10px;" (click)="depositFunds(wallet.id)">+ Deposit 500</button>
+    </div>
+  </div>
+</div>
